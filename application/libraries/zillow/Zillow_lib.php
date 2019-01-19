@@ -31,7 +31,7 @@ class Zillow_lib
         $xmlstr = file_get_contents($url);
         $xmlcont = new SimpleXMLElement($xmlstr);
 
-        return $xmlcont->response->results->result[0];
+        return $xmlcont->response->results ? $xmlcont->response->results->result[0] : false;
     }
 
     /**

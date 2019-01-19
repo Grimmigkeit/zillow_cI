@@ -36,6 +36,14 @@ class Zillow extends CI_Controller {
 
 				$searchRes = $zillow->getFirstSearchResult(urlencode(trim($address[0])), trim($address[1]));
 
+				if (!$searchRes) {
+
+					return $this->output
+						->set_content_type('application/json')
+						->set_output(json_encode(['error' => 'Search result is empty'])
+					);
+				}
+
 				$price = number_format($searchRes->zestimate->amount->__toString());
 
 				$result = [
